@@ -17,7 +17,12 @@ class Cache(object):
                 cli.printC(resp.content, cli.WARNING)
                 sys.exit(1)
 
-        self.json = json.loads(resp.content)
+        try:
+            self.json = json.loads(resp.content)
+        except json.JSONDecodeError:
+            cli.printC("Failed to load JSON, is the ID correct?", cli.FAIL)
+            sys.exit(1)
+
         with open("cache/petition_{}.json".format(petition_id), 'w') as f:
             f.write(json.dumps(self.json))
 

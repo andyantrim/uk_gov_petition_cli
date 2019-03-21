@@ -1,9 +1,15 @@
+import sys
+
 from report import Report
 import cli
 
-title = "Checking Petition to revoke Article 50"
 
-report = Report("241584")
+try:
+    tid = sys.argv[1]
+except IndexError:
+    tid = "241584"
+report = Report(tid)
+title = report.title
 
 
 def total_count(rep):

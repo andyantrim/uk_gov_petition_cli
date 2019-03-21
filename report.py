@@ -14,6 +14,8 @@ class Report(object):
         country_list = self.cache.get().get('data', {}).get('attributes', {}).get('signatures_by_country', [])
         self.countries = sort(country_list)
 
+        self.title = self.cache.get().get('data', {}).get('attributes', {}).get("action", "Not found")
+
     def get_count(self):
         return self.cache.get().get("data", {}).get("attributes", {})['signature_count']
 

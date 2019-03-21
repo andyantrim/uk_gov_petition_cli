@@ -1,3 +1,4 @@
+import sys
 try:
     from pick import pick
 except ImportError:
@@ -32,6 +33,11 @@ def build_cli(title, options, function_list, **kwargs):
     :param function_list: A list of functions of equal size to options list
     :return: TBD
     """
+    options.append("{:30}| Quit the program".format("Quit"))
+    while True:
+        option, index = pick(options, title)
 
-    option, index = pick(options, title)
-    return function_list[index](**kwargs)
+        if index == len(options) - 1:
+            sys.exit(0)
+        function_list[index](**kwargs)
+        input("hit Enter key to continue")
